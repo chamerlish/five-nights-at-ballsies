@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://diuohhrxeb1ns"]
+
+[ext_resource type="PackedScene" uid="uid://b85klhvslwcgp" path="res://Scenes/player_cam.tscn" id="1_a02cp"]
+[ext_resource type="PackedScene" uid="uid://biqrpv0t3ua6j" path="res://Scenes/Animatronic/animatronic.tscn" id="2_5a7ea"]
+[ext_resource type="Texture2D" uid="uid://ica7dh0d4ou6" path="res://icon.svg" id="3_8j60k"]
+
+[node name="World" type="Node2D" unique_id=1997208835]
+
+[node name="PlayerCam" parent="." unique_id=415335926 instance=ExtResource("1_a02cp")]
+
+[node name="Animatronic" parent="." unique_id=109424988 instance=ExtResource("2_5a7ea")]
+texture = ExtResource("3_8j60k")
+starting_room = 1

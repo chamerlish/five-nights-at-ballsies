@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dxb4yopxcwc16"]
+
+[ext_resource type="Texture2D" uid="uid://drr7xi6t7okyv" path="res://Resources/Sprites/Camera/cam_button.png" id="1_4c1n3"]
+[ext_resource type="Script" uid="uid://ck6h1ad6fpod2" path="res://Scripts/Resources/cam_button.gd" id="2_1v8cu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4c1n3"]
+atlas = ExtResource("1_4c1n3")
+region = Rect2(0, 0, 60.5, 40)
+
+[node name="CamButton" type="TextureButton" unique_id=1448322891]
+z_index = 100
+texture_filter = 1
+offset_right = 111.0
+offset_bottom = 74.0
+mouse_filter = 1
+texture_normal = SubResource("AtlasTexture_4c1n3")
+stretch_mode = 1
+script = ExtResource("2_1v8cu")
+metadata/_edit_group_ = true
+
+[node name="CamLabel" type="RichTextLabel" parent="." unique_id=1096369535]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Cam01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

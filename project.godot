@@ -11,12 +11,18 @@ config_version=5
 [application]
 
 config/name="Five nights at ballsies"
+run/main_scene="uid://diuohhrxeb1ns"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Global="*uid://cvr01bf15ns8q"
+
+[display]
+
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
 
 [physics]
 
