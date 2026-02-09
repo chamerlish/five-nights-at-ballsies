@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://biqrpv0t3ua6j"]
+
+[ext_resource type="Script" uid="uid://cohmuwp0recfb" path="res://Scripts/animatronic.gd" id="1_hceks"]
+
+[node name="Animatronic" type="Sprite2D" unique_id=109424988]
+script = ExtResource("1_hceks")
