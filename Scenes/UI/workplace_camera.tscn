@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://b85klhvslwcgp"]
+
+[ext_resource type="Script" uid="uid://bjfog3y4wkpxp" path="res://Scripts/workplace_camera.gd" id="1_vdc7n"]
+[ext_resource type="PackedScene" uid="uid://dxb4yopxcwc16" path="res://Scenes/UI/cam_button.tscn" id="3_55os6"]
+[ext_resource type="Texture2D" uid="uid://ctdjql4i8tw55" path="res://Resources/Sprites/Background/background_sheet.png" id="4_emwuo"]
+[ext_resource type="Script" uid="uid://b5hrc8b5trqab" path="res://Scripts/UI/background.gd" id="5_50dwd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fo5ed"]
+atlas = ExtResource("4_emwuo")
+region = Rect2(0, 0, 1600, 722.727)
+
+[node name="WorkplaceCamera" type="Camera2D" unique_id=415335926 node_paths=PackedStringArray("background")]
+enabled = false
+script = ExtResource("1_vdc7n")
+background = NodePath("Background")
+
+[node name="Minimap" type="Control" parent="." unique_id=1805337793]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="CamButton" parent="Minimap" unique_id=1448322891 instance=ExtResource("3_55os6")]
+layout_mode = 0
+
+[node name="CamButton2" parent="Minimap" unique_id=956618251 instance=ExtResource("3_55os6")]
+layout_mode = 0
+offset_left = -288.0
+offset_top = -160.0
+offset_right = -177.0
+offset_bottom = -86.0
+cam_id = 1
+
+[node name="CamButton3" parent="Minimap" unique_id=726059623 instance=ExtResource("3_55os6")]
+layout_mode = 0
+offset_top = -192.0
+offset_bottom = -118.0
+cam_id = 2
+
+[node name="Background" type="TextureRect" parent="." unique_id=895318932]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_fo5ed")
+script = ExtResource("5_50dwd")

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b0rnasd0xaltb"]
+
+[ext_resource type="Script" uid="uid://btp28hbrvkwrk" path="res://Scripts/UI/office_camera.gd" id="1_mdmwq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n5b8r"]
+size = Vector2(24, 656)
+
+[node name="OfficeCamera" type="CharacterBody2D" unique_id=219672839]
+script = ExtResource("1_mdmwq")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1270570159]
+position_smoothing_enabled = true
+
+[node name="LeftCollision" type="CollisionShape2D" parent="." unique_id=18939473]
+position = Vector2(-564, 0)
+shape = SubResource("RectangleShape2D_n5b8r")
+
+[node name="RightCollision" type="CollisionShape2D" parent="." unique_id=271469279]
+position = Vector2(560, 0)
+shape = SubResource("RectangleShape2D_n5b8r")
