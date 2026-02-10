@@ -1,11 +1,10 @@
 [gd_scene format=3 uid="uid://diuohhrxeb1ns"]
 
 [ext_resource type="PackedScene" uid="uid://b85klhvslwcgp" path="res://Scenes/UI/workplace_camera.tscn" id="1_a02cp"]
-[ext_resource type="PackedScene" uid="uid://biqrpv0t3ua6j" path="res://Scenes/Animatronic/animatronic.tscn" id="2_5a7ea"]
-[ext_resource type="Texture2D" uid="uid://ica7dh0d4ou6" path="res://icon.svg" id="3_8j60k"]
 [ext_resource type="Script" uid="uid://bm52nhn1hem02" path="res://Scripts/UI/open_close_cam_area.gd" id="4_8j60k"]
 [ext_resource type="Texture2D" uid="uid://b0dkxr860r17k" path="res://Resources/Sprites/Camera/cam_slide.png" id="5_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://b0rnasd0xaltb" path="res://Scenes/UI/office_camera.tscn" id="5_fo5ed"]
+[ext_resource type="PackedScene" uid="uid://010b1doxmvyf" path="res://Scenes/Animatronic/animatronic_sub_test.tscn" id="7_o06y3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5a7ea"]
 size = Vector2(448.5, 64)
@@ -20,16 +19,6 @@ normal = Vector2(-1, 0)
 [node name="World" type="Node2D" unique_id=1997208835]
 
 [node name="PlayerCam" parent="." unique_id=415335926 instance=ExtResource("1_a02cp")]
-
-[node name="Animatronic" parent="." unique_id=109424988 instance=ExtResource("2_5a7ea")]
-texture = ExtResource("3_8j60k")
-starting_room = 1
-path_phase_index = Dictionary[int, int]({
-0: 3,
-1: 4,
-3: 0
-})
-path_order = Array[int]([1, 0, 3])
 
 [node name="OpenCloseCamArea" type="Area2D" parent="." unique_id=1677273352]
 position = Vector2(0, 288)
@@ -59,3 +48,7 @@ position = Vector2(768, 0)
 
 [node name="RightCollision" type="CollisionShape2D" parent="Walls/RightWall" unique_id=1563920651]
 shape = SubResource("WorldBoundaryShape2D_5ukr8")
+
+[node name="Animatronic" parent="." unique_id=396223518 instance=ExtResource("7_o06y3")]
+path_order = Array[int]([0, 1, 2])
+phase_order = Array[int]([3, 3, 3])
