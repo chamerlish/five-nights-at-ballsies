@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dxb4yopxcwc16"]
 
 [ext_resource type="Texture2D" uid="uid://drr7xi6t7okyv" path="res://Resources/Sprites/Camera/cam_button.png" id="1_4c1n3"]
-[ext_resource type="Script" uid="uid://ck6h1ad6fpod2" path="res://Scripts/Resources/cam_button.gd" id="2_1v8cu"]
+[ext_resource type="Script" uid="uid://ck6h1ad6fpod2" path="res://Scripts/UI/cam_button.gd" id="2_1v8cu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4c1n3"]
 atlas = ExtResource("1_4c1n3")

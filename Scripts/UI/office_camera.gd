@@ -17,6 +17,7 @@ func _on_camera_changed(new_cam:int) -> void:
 		pov_cam.enabled = false
 	else:
 		pov_cam.enabled = true
+		
 
 func _physics_process(delta):
 	var mouse_pos = get_viewport().get_mouse_position()
