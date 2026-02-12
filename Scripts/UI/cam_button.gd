@@ -1,6 +1,12 @@
 extends TextureButton
 
-@export var cam_id: int
+@export var cam_id: Global.Rooms
+@export var direction: Direction
+enum Direction {
+	DOWN_LEFT,
+	UP_LEFT,
+	CENTER
+}
 
 func _ready() -> void:
 	texture_normal = texture_normal.duplicate()  
@@ -8,7 +14,7 @@ func _ready() -> void:
 	Global.camera_changed.connect(_on_camera_changed)
 	
 func _on_camera_changed(new_cam: int) -> void:
-	texture_normal.region = Rect2(int(cam_id == new_cam) * 60.5, 0, 60.5, 40)
+	texture_normal.region = Rect2(int(cam_id == new_cam) * 33, 31 * direction, 33, 31)
 
 func _on_pressed() -> void:
 	Global.currect_cam = cam_id

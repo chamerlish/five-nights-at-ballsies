@@ -1,19 +1,22 @@
 extends CharacterBody2D
 
-# Movement settings
-@export var move_speed: float = 600.0  # How fast the camera moves
+
+@export var move_speed: float = 600.0 
 @export var mouse_sensitivity: float = 1.5
 
 @onready var pov_cam: Camera2D = $Camera2D
 
 var screen_size: Vector2
 
+@onready var initial_pos = global_position
+
 func _ready():
 	screen_size = get_viewport_rect().size
 	Global.camera_changed.connect(_on_camera_changed)
 
 func _on_camera_changed(new_cam:int) -> void:
-	if (new_cam >= 0):
+	position = initial_pos
+	if (new_cam > Global.Rooms.OFFICE):
 		pov_cam.enabled = false
 	else:
 		pov_cam.enabled = true

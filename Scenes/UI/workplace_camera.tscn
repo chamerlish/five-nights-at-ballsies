@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bjfog3y4wkpxp" path="res://Scripts/workplace_camera.gd" id="1_vdc7n"]
 [ext_resource type="PackedScene" uid="uid://dxb4yopxcwc16" path="res://Scenes/UI/cam_button.tscn" id="3_55os6"]
 [ext_resource type="Texture2D" uid="uid://ctdjql4i8tw55" path="res://Resources/Sprites/Background/background_sheet.png" id="4_emwuo"]
+[ext_resource type="Texture2D" uid="uid://dqoeae4dp00i0" path="res://Resources/Sprites/Camera/minimap.png" id="5_4ixuq"]
 [ext_resource type="Script" uid="uid://b5hrc8b5trqab" path="res://Scripts/UI/background.gd" id="5_50dwd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fo5ed"]
@@ -13,6 +14,21 @@ region = Rect2(0, 0, 1600, 722.727)
 enabled = false
 script = ExtResource("1_vdc7n")
 background = NodePath("Background")
+
+[node name="Background" type="TextureRect" parent="." unique_id=895318932]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -800.0
+offset_top = -361.0
+offset_right = 800.0
+offset_bottom = 361.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_fo5ed")
+script = ExtResource("5_50dwd")
 
 [node name="Minimap" type="Control" parent="." unique_id=1805337793]
 layout_mode = 3
@@ -26,29 +42,29 @@ offset_top = -40.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="CamButton" parent="Minimap" unique_id=1448322891 instance=ExtResource("3_55os6")]
+[node name="TextureRect" type="TextureRect" parent="Minimap" unique_id=167234791]
+texture_filter = 1
 layout_mode = 0
+offset_left = 154.0
+offset_top = -160.0
+offset_right = 576.0
+offset_bottom = 321.0
+mouse_filter = 2
+texture = ExtResource("5_4ixuq")
 
 [node name="CamButton2" parent="Minimap" unique_id=956618251 instance=ExtResource("3_55os6")]
 layout_mode = 0
-offset_left = -288.0
-offset_top = -160.0
-offset_right = -177.0
-offset_bottom = -86.0
+offset_left = 407.0
+offset_top = 100.0
+offset_right = 440.0
+offset_bottom = 131.0
 cam_id = 1
+direction = 1
 
 [node name="CamButton3" parent="Minimap" unique_id=726059623 instance=ExtResource("3_55os6")]
 layout_mode = 0
-offset_top = -192.0
-offset_bottom = -118.0
+offset_left = 353.0
+offset_top = 148.0
+offset_right = 386.0
+offset_bottom = 179.0
 cam_id = 2
-
-[node name="Background" type="TextureRect" parent="." unique_id=895318932]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = SubResource("AtlasTexture_fo5ed")
-script = ExtResource("5_50dwd")

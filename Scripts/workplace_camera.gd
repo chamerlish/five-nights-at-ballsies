@@ -8,8 +8,8 @@ func _ready() -> void:
 	background.hide()
 	Global.camera_changed.connect(_on_camera_changed)
 
-func _on_camera_changed(new_cam:int) -> void:
-	if (new_cam >= 0):
+func _on_camera_changed(new_cam) -> void:
+	if (new_cam > Global.Rooms.OFFICE):
 		enabled = true
 		minimap.show()
 		background.show()

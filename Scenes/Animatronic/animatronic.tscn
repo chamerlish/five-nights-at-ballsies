@@ -4,7 +4,3 @@
 
 [node name="Animatronic" type="Sprite2D" unique_id=109424988]
 script = ExtResource("1_hceks")
-
-[node name="MoveOpportunityTimer" type="Timer" parent="." unique_id=868487015]
-wait_time = 3.0
-autostart = true

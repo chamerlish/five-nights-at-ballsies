@@ -5,6 +5,3 @@
 [node name="Animatronic" type="Sprite2D" unique_id=396223518]
 script = ExtResource("1_ba0db")
 metadata/_custom_type_script = "uid://cohmuwp0recfb"
-
-[node name="MoveOpportunityTimer" type="Timer" parent="." unique_id=400476699]
-autostart = true
