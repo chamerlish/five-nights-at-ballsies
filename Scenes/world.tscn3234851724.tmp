@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://bm52nhn1hem02" path="res://Scripts/UI/open_close_cam_area.gd" id="4_8j60k"]
 [ext_resource type="Texture2D" uid="uid://b0dkxr860r17k" path="res://Resources/Sprites/Camera/cam_slide.png" id="5_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://b0rnasd0xaltb" path="res://Scenes/UI/office_camera.tscn" id="5_fo5ed"]
-[ext_resource type="Texture2D" uid="uid://ica7dh0d4ou6" path="res://icon.svg" id="6_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://010b1doxmvyf" path="res://Scenes/Animatronic/animatronic_sub_test.tscn" id="7_o06y3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5a7ea"]
@@ -51,9 +50,7 @@ position = Vector2(768, 0)
 shape = SubResource("WorldBoundaryShape2D_5ukr8")
 
 [node name="Animatronic" parent="." unique_id=396223518 instance=ExtResource("7_o06y3")]
-texture = ExtResource("6_5ukr8")
-starting_room = 2
+starting_room = 3
 path_order = Array[int]([0, 1, 2])
 phase_order = Array[int]([3, 3, 3])
 is_free_roam = true
-allowed_rooms = Array[int]([0, 1, 2])

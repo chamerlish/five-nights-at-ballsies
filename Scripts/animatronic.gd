@@ -19,6 +19,8 @@ var current_room: Global.Rooms
 
 @onready var movement_opportunity_timer: Timer = Timer.new()
 
+var target_room: Global.Rooms
+
 
 func _ready() -> void:
 	
@@ -36,9 +38,16 @@ func _ready() -> void:
 func _on_camera_changed(new_cam: int):
 	update_sprite(new_cam)
 
+var target_locked: bool = false
+
 func _on_try_movement():
 	if is_free_roam:
-		free_roam_move()
+		
+		if target_locked == false:
+			target_room = pick_random_room()
+			target_locked = true
+		
+		free_roam_move_forward(target_room)
 	else:
 		move_forward_path()
 
@@ -83,10 +92,66 @@ func move_forward_path() -> void:
 func finish_path():
 	pass
 
-func free_roam_move() -> void:
+func free_roam_move_forward(target: Global.Rooms) -> void:
+	var path = get_free_roam_path(current_room, target)
+	print(path)
+
+	if path.size() <= 1:
+		target_locked = false
+		finish_path()
+		return
+
+	var next_room = path[1] # index 0 is current room
 	
+	Global.animatronic_moved.emit(current_room, next_room, id)
+	current_room = next_room
+
 	update_sprite(Global.currect_cam)
 
+func get_free_roam_path(start: Global.Rooms, target: Global.Rooms) -> Array[Global.Rooms]:
+	if start == target:
+		return [start]
+
+	var queue: Array[Global.Rooms] = []
+	var came_from := {}
+
+	queue.append(start)
+	came_from[start] = null 
+
+	while queue.size() > 0:
+		var current: Global.Rooms = queue.pop_front()
+
+		if current == target:
+			break
+
+		var room_data: RoomData = null
+		for room in Global.rooms_data:
+			if room.room_id == current:
+				room_data = room
+				break
+
+		if room_data == null:
+			continue
+
+		for neighbor: Global.Rooms in room_data.adjacent_roome:
+			if not came_from.has(neighbor):
+				queue.append(neighbor)
+				came_from[neighbor] = current
+
+	# If no path
+	if not came_from.has(target):
+		return []
+
+	# Reconstruct path
+	var path: Array[Global.Rooms] = []
+	var step: Global.Rooms = target
+
+	while step != start:
+		path.insert(0, step)
+		step = came_from[step]
+
+	path.insert(0, start)
+	return path
 func pick_random_room() -> int:
 	var rooms_copy = allowed_rooms.duplicate()
 	rooms_copy.shuffle()
