@@ -22,6 +22,8 @@ var rooms_data: Array[RoomData] = [
 	
 ]
 
+var animatronic_list: Array[Animatronic] = []
+
 var currect_cam: int:
 	get:
 		return _currect_cam
@@ -38,4 +40,11 @@ func get_room_by_id(id: Rooms) -> RoomData:
 			return room
 	
 	return
+
+func get_animatronic_by_room(id: Rooms) -> Array[Animatronic]:
+	var return_list: Array[Animatronic]
+	for animatronic in animatronic_list:
+		if animatronic.current_room == id:
+			return_list.append(animatronic)
 	
+	return return_list

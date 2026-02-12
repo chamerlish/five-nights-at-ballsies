@@ -4,7 +4,10 @@ class_name Animatronic
 
 @export var starting_room: Global.Rooms
 
-var current_room: Global.Rooms
+var current_room: Global.Rooms:
+	set(value):
+		current_room = value
+		update_sprite(Global.currect_cam)
 
 @export var ai_difficulty: int
 @export var mov_opp_delay: int = 3
@@ -21,11 +24,14 @@ var current_room: Global.Rooms
 
 var target_room: Global.Rooms
 
+var current_room_animatronic: Array[Animatronic]
+var next_room_animatronic: Array[Animatronic]
+
+func _init() -> void:
+	Global.animatronic_list.insert(id, self)
 
 func _ready() -> void:
-	
 	current_room = starting_room
-	update_sprite(Global.currect_cam)
 	
 	add_child(movement_opportunity_timer)
 	movement_opportunity_timer.wait_time = mov_opp_delay
@@ -55,6 +61,7 @@ var is_in_office: bool
 var is_in_right_door: bool
 var is_in_left_door: bool
 
+@warning_ignore("shadowed_variable")
 func _on_animatronic_moved(_old_room, _new_room, id):
 	if id == self.id:
 		is_in_office = _new_room == Global.Rooms.OFFICE
@@ -68,6 +75,8 @@ func move_forward_path() -> void:
 	if path_pos > path_order.size() - 1: return
 	var max_phase = phase_order[path_pos]
 	
+	if path_pos + 1 < path_order.size():
+		next_room_animatronic = Global.get_animatronic_by_room(path_order[path_pos + 1])
 	
 	#print(max_phase)
 	
@@ -87,10 +96,13 @@ func move_forward_path() -> void:
 		Global.animatronic_moved.emit(current_room, path_order[path_pos], id)
 		current_room = path_order[path_pos]
 
-	update_sprite(Global.currect_cam)
 
 func finish_path():
 	pass
+
+func can_move() -> bool:
+	return true 
+	# by default no condition is needed for an animatronic to be able to move if he wins a movement opportunity
 
 func free_roam_move_forward(target: Global.Rooms) -> void:
 	var path = get_free_roam_path(current_room, target)
@@ -101,12 +113,12 @@ func free_roam_move_forward(target: Global.Rooms) -> void:
 		finish_path()
 		return
 
-	var next_room = path[1] # index 0 is current room
-	
-	Global.animatronic_moved.emit(current_room, next_room, id)
-	current_room = next_room
+	var next_room: Global.Rooms = path[1] # index 0 is current room
+	next_room_animatronic = Global.get_animatronic_by_room(next_room)
+	if can_move():
+		Global.animatronic_moved.emit(current_room, next_room, id)
+		current_room = next_room
 
-	update_sprite(Global.currect_cam)
 
 func get_free_roam_path(start: Global.Rooms, target: Global.Rooms) -> Array[Global.Rooms]:
 	if start == target:
@@ -152,7 +164,7 @@ func get_free_roam_path(start: Global.Rooms, target: Global.Rooms) -> Array[Glob
 
 	path.insert(0, start)
 	return path
-func pick_random_room() -> int:
+func pick_random_room() -> Global.Rooms:
 	var rooms_copy = allowed_rooms.duplicate()
 	rooms_copy.shuffle()
 	return rooms_copy[0]

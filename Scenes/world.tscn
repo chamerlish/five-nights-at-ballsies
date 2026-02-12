@@ -51,6 +51,7 @@ position = Vector2(768, 0)
 shape = SubResource("WorldBoundaryShape2D_5ukr8")
 
 [node name="Animatronic" parent="." unique_id=396223518 instance=ExtResource("7_o06y3")]
+position = Vector2(-384, -96)
 texture = ExtResource("6_5ukr8")
 starting_room = 2
 path_order = Array[int]([0, 1, 2])
