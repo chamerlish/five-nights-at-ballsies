@@ -16,6 +16,7 @@ var current_room: Global.Rooms:
 
 @export var path_order: Array[Global.Rooms]
 @export var phase_order: Array[int]
+@export var delay_order: Array[int]
 
 @export var is_free_roam: bool
 @export var allowed_rooms: Array[Global.Rooms]
@@ -35,15 +36,22 @@ func _init() -> void:
 func _ready() -> void:
 	current_room = starting_room
 	
+	movement_opportunity_timer.autostart = false
 	add_child(movement_opportunity_timer)
-	movement_opportunity_timer.wait_time = mov_opp_delay
-	movement_opportunity_timer.start()
+	
+	if is_free_roam:
+		reset_timer(mov_opp_delay)
+	else: reset_timer(delay_order[0])
 	
 	Global.camera_changed.connect(_on_camera_changed)
 	Global.animatronic_moved.connect(_on_animatronic_moved)
 	movement_opportunity_timer.timeout.connect(_on_try_movement)
 
-func _on_camera_changed(new_cam: int):
+func reset_timer(wait_time: int) -> void:
+	movement_opportunity_timer.wait_time = wait_time
+	movement_opportunity_timer.start()
+
+func _on_camera_changed(new_cam: int) -> void:
 	update_sprite(new_cam)
 
 var target_locked: bool = false
@@ -101,10 +109,13 @@ func move_forward_path() -> void:
 		phase = 0
 		path_pos += 1
 		
+		
+		
 		if path_pos > path_order.size() - 1:
 			finish_path()
 			return
-		
+		reset_timer(delay_order[path_pos])
+		print(movement_opportunity_timer.wait_time)
 		current_room = path_order[path_pos]
 
 
