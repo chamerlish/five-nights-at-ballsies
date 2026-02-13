@@ -21,6 +21,8 @@ var current_room: Global.Rooms:
 
 @export var id: int
 
+@export var move_infinitly: bool = true
+
 @onready var movement_opportunity_timer: Timer = Timer.new()
 
 var target_room: Global.Rooms
@@ -55,15 +57,16 @@ func _on_camera_changed(new_cam: int) -> void:
 var target_locked: bool = false
 
 func _on_try_movement():
-	if is_free_roam:
-		
-		if target_locked == false:
-			target_room = pick_random_room()
-			target_locked = true
-		
-		free_roam_move_forward(target_room)
-	else:
-		move_forward_path()
+	if randi_range(1, 20) <= ai_difficulty: # successful movement
+		if is_free_roam:
+			
+			if target_locked == false:
+				target_room = pick_random_room()
+				target_locked = true
+			
+			free_roam_move_forward(target_room)
+		else:
+			move_forward_path()
 
 var is_in_office: bool
 var is_in_right_door: bool
@@ -110,7 +113,10 @@ func move_forward_path() -> void:
 		
 		
 		if path_pos > path_patrol.size() - 1:
+			
 			finish_path()
+			if move_infinitly:
+				reset_path()
 			return
 		reset_timer(path_patrol[path_pos].wait_time)
 		print(movement_opportunity_timer.wait_time)
@@ -119,6 +125,13 @@ func move_forward_path() -> void:
 
 func finish_path():
 	pass
+
+func reset_path():
+	current_room = starting_room
+	path_pos = 0
+	phase = 0
+	print("i")
+
 
 func can_move() -> bool:
 	return true 

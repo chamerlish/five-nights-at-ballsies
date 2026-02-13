@@ -5,7 +5,6 @@ const NUMBER_OF_ROOMS = 11
 const BACKGROUND_SIZE = Vector2(TEXTURE_SIZE.x, TEXTURE_SIZE.y / NUMBER_OF_ROOMS)
 
 func _ready() -> void:
-	print(BACKGROUND_SIZE)
 	Global.camera_changed.connect(_on_camera_changed)
 	
 func _on_camera_changed(new_cam):

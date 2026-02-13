@@ -14,7 +14,6 @@ func _ready() -> void:
 func open_close():
 	is_openned = not is_openned
 	if not is_openned:
-		print(Global.currect_cam)
 		last_opened_cam = Global.currect_cam
 		Global.currect_cam = Global.Rooms.OFFICE
 	else:

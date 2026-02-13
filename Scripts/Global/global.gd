@@ -30,7 +30,7 @@ var currect_cam: int:
 	set(new_cam):
 		if _currect_cam == new_cam:
 			return 
-		print("Changed camera from %d to %d" % [_currect_cam, new_cam])
+		# print("Changed camera from %d to %d" % [_currect_cam, new_cam])
 		_currect_cam = new_cam
 		emit_signal("camera_changed", new_cam)
 
