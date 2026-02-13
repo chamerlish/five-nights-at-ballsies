@@ -53,8 +53,17 @@ shape = SubResource("WorldBoundaryShape2D_5ukr8")
 [node name="Animatronic" parent="." unique_id=396223518 instance=ExtResource("7_o06y3")]
 position = Vector2(-384, -96)
 texture = ExtResource("6_5ukr8")
+path_order = Array[int]([0, 1, 2])
+phase_order = Array[int]([3, 3, 3])
+allowed_rooms = Array[int]([0, 1, 2])
+
+[node name="Animatronic2" parent="." unique_id=1650407809 instance=ExtResource("7_o06y3")]
+position = Vector2(-16, -144)
+texture = ExtResource("6_5ukr8")
 starting_room = 2
+mov_opp_delay = 1000000000
 path_order = Array[int]([0, 1, 2])
 phase_order = Array[int]([3, 3, 3])
 is_free_roam = true
 allowed_rooms = Array[int]([0, 1, 2])
+id = 1
