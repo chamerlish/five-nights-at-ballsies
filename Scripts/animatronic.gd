@@ -14,9 +14,7 @@ var current_room: Global.Rooms:
 @export var ai_difficulty: int
 @export var mov_opp_delay: int = 3
 
-@export var path_order: Array[Global.Rooms]
-@export var phase_order: Array[int]
-@export var delay_order: Array[int]
+@export var path_patrol: Array[PathStep]
 
 @export var is_free_roam: bool
 @export var allowed_rooms: Array[Global.Rooms]
@@ -41,7 +39,7 @@ func _ready() -> void:
 	
 	if is_free_roam:
 		reset_timer(mov_opp_delay)
-	else: reset_timer(delay_order[0])
+	else: reset_timer(path_patrol[0].wait_time)
 	
 	Global.camera_changed.connect(_on_camera_changed)
 	Global.animatronic_moved.connect(_on_animatronic_moved)
@@ -79,8 +77,8 @@ func _on_animatronic_moved(_old_room, _new_room, id):
 		if is_free_roam:
 			next_room = _new_room
 		else: 
-			if path_pos + 1 < path_order.size():
-				next_room = path_order[path_pos + 1]
+			if path_pos + 1 < path_patrol.size():
+				next_room = path_patrol[path_pos + 1].room_id
 			else: next_room_animatronic = []
 		
 		current_room_animatronic = Global.get_animatronic_by_room(_new_room)
@@ -94,8 +92,8 @@ var phase: int = 0
 var path_pos: int = 0
 
 func move_forward_path() -> void:
-	if path_pos > path_order.size() - 1: return
-	var max_phase = phase_order[path_pos]
+	if path_pos > path_patrol.size() - 1: return
+	var max_phase = path_patrol[path_pos].phases
 	
 	
 	#print(max_phase)
@@ -111,12 +109,12 @@ func move_forward_path() -> void:
 		
 		
 		
-		if path_pos > path_order.size() - 1:
+		if path_pos > path_patrol.size() - 1:
 			finish_path()
 			return
-		reset_timer(delay_order[path_pos])
+		reset_timer(path_patrol[path_pos].wait_time)
 		print(movement_opportunity_timer.wait_time)
-		current_room = path_order[path_pos]
+		current_room = path_patrol[path_pos].room_id
 
 
 func finish_path():

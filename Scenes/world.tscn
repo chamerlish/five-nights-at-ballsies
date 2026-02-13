@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b0dkxr860r17k" path="res://Resources/Sprites/Camera/cam_slide.png" id="5_5ukr8"]
 [ext_resource type="PackedScene" uid="uid://b0rnasd0xaltb" path="res://Scenes/UI/office_camera.tscn" id="5_fo5ed"]
 [ext_resource type="Texture2D" uid="uid://ica7dh0d4ou6" path="res://icon.svg" id="6_5ukr8"]
+[ext_resource type="Script" uid="uid://cd7vsjs4m70uh" path="res://Scripts/Resources/path_step.gd" id="7_k7acu"]
 [ext_resource type="PackedScene" uid="uid://010b1doxmvyf" path="res://Scenes/Animatronic/animatronic_sub_test.tscn" id="7_o06y3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5a7ea"]
@@ -16,6 +17,25 @@ distance = -768.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5ukr8"]
 normal = Vector2(-1, 0)
+
+[sub_resource type="Resource" id="Resource_o06y3"]
+script = ExtResource("7_k7acu")
+wait_time = 3.0
+phases = 4
+metadata/_custom_type_script = "uid://cd7vsjs4m70uh"
+
+[sub_resource type="Resource" id="Resource_k7acu"]
+script = ExtResource("7_k7acu")
+wait_time = 2.0
+room_id = 2
+phases = 1
+metadata/_custom_type_script = "uid://cd7vsjs4m70uh"
+
+[sub_resource type="Resource" id="Resource_5v1tr"]
+script = ExtResource("7_k7acu")
+wait_time = 2.0
+room_id = 1
+metadata/_custom_type_script = "uid://cd7vsjs4m70uh"
 
 [node name="World" type="Node2D" unique_id=1997208835]
 
@@ -53,7 +73,5 @@ shape = SubResource("WorldBoundaryShape2D_5ukr8")
 [node name="Animatronic" parent="." unique_id=396223518 instance=ExtResource("7_o06y3")]
 position = Vector2(-384, -96)
 texture = ExtResource("6_5ukr8")
-path_order = Array[int]([0, 1, 2])
-phase_order = Array[int]([3, 3, 3])
-delay_order = Array[int]([3, 3, 3])
+path_patrol = Array[ExtResource("7_k7acu")]([SubResource("Resource_o06y3"), SubResource("Resource_k7acu"), SubResource("Resource_5v1tr")])
 allowed_rooms = Array[int]([0, 1, 2])
