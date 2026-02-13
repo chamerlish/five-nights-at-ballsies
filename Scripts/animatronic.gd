@@ -5,8 +5,10 @@ class_name Animatronic
 @export var starting_room: Global.Rooms
 
 var current_room: Global.Rooms:
-	set(value):
-		current_room = value
+	set(new_room):
+		
+		Global.animatronic_moved.emit(current_room, new_room, id)
+		current_room = new_room
 		update_sprite(Global.currect_cam)
 
 @export var ai_difficulty: int
@@ -63,16 +65,18 @@ var is_in_left_door: bool
 
 @warning_ignore("shadowed_variable")
 func _on_animatronic_moved(_old_room, _new_room, id):
-	print("just moved to: %s" % _new_room)
-	
 	# Only update next_room_animatronic if THIS animatronic moved
 	if id == self.id:
+		var next_room: Global.Rooms = _new_room
+		if is_free_roam:
+			next_room = _new_room
+		else: 
+			if path_pos + 1 < path_order.size():
+				next_room = path_order[path_pos + 1]
+			else: next_room_animatronic = []
+		
 		current_room_animatronic = Global.get_animatronic_by_room(_new_room)
-		
-		print(_new_room)
-		
-		if path_pos + 1 < path_order.size():
-			next_room_animatronic = Global.get_animatronic_by_room(path_order[path_pos + 1])
+		next_room_animatronic = Global.get_animatronic_by_room(next_room)
 		
 		is_in_office = _new_room == Global.Rooms.OFFICE
 		is_in_right_door = _new_room == Global.Rooms.RIGHT_DOOR
@@ -85,8 +89,6 @@ func move_forward_path() -> void:
 	if path_pos > path_order.size() - 1: return
 	var max_phase = phase_order[path_pos]
 	
-	if path_pos + 1 < path_order.size():
-		print("i am: %s next anima: %s next room: %s" % [self, next_room_animatronic, path_order[path_pos + 1]])
 	
 	#print(max_phase)
 	
@@ -103,10 +105,7 @@ func move_forward_path() -> void:
 			finish_path()
 			return
 		
-		Global.animatronic_moved.emit(current_room, path_order[path_pos], id)
-		
 		current_room = path_order[path_pos]
-		print(current_room)
 
 
 func finish_path():
@@ -125,9 +124,7 @@ func free_roam_move_forward(target: Global.Rooms) -> void:
 		return
 
 	var next_room: Global.Rooms = path[1] # index 0 is current room
-	next_room_animatronic = Global.get_animatronic_by_room(next_room)
 	if can_move():
-		Global.animatronic_moved.emit(current_room, next_room, id)
 		current_room = next_room
 
 func get_free_roam_path(start: Global.Rooms, target: Global.Rooms) -> Array[Global.Rooms]:
