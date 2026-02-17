@@ -4,24 +4,26 @@ class_name Animatronic
 
 @export var starting_room: Global.Rooms
 
+@export var animatronic_id: int
+
 var current_room: Global.Rooms:
 	set(new_room):
 		
-		Global.animatronic_moved.emit(current_room, new_room, id)
+		Global.animatronic_moved.emit(current_room, new_room, animatronic_id)
 		current_room = new_room
 		update_sprite(Global.currect_cam)
 
 @export var ai_difficulty: int
-@export var mov_opp_delay: int = 3
+@export var mov_opp_delay: float = 3
 
 @export var path_patrol: Array[PathStep]
 
-@export var is_free_roam: bool
 @export var allowed_rooms: Array[Global.Rooms]
 
-@export var id: int
-
 @export var move_infinitly: bool = true
+@export var is_free_roam: bool
+@export var chance_of_lured: float = 1
+@export var distance_of_lured: float
 
 @onready var movement_opportunity_timer: Timer = Timer.new()
 
@@ -31,7 +33,7 @@ var current_room_animatronic: Array[Animatronic]
 var next_room_animatronic: Array[Animatronic]
 
 func _init() -> void:
-	Global.animatronic_list.insert(id, self)
+	Global.animatronic_list.insert(animatronic_id, self)
 
 func _ready() -> void:
 	current_room = starting_room
@@ -45,9 +47,15 @@ func _ready() -> void:
 	
 	Global.camera_changed.connect(_on_camera_changed)
 	Global.animatronic_moved.connect(_on_animatronic_moved)
+	Global.audio_lure_played.connect(_on_audio_lure_played)
 	movement_opportunity_timer.timeout.connect(_on_try_movement)
 
-func reset_timer(wait_time: int) -> void:
+
+func _on_audio_lure_played(played_position: Global.Rooms):
+	if randf_range(0, 1) < chance_of_lured and not is_in_office:
+		print(get_two_room_path(current_room, played_position))
+
+func reset_timer(wait_time: float) -> void:
 	movement_opportunity_timer.wait_time = wait_time
 	movement_opportunity_timer.start()
 
@@ -73,9 +81,9 @@ var is_in_right_door: bool
 var is_in_left_door: bool
 
 @warning_ignore("shadowed_variable")
-func _on_animatronic_moved(_old_room, _new_room, id):
+func _on_animatronic_moved(_old_room, _new_room, animatronic_id):
 	# Only update next_room_animatronic if THIS animatronic moved
-	if id == self.id:
+	if animatronic_id == self.animatronic_id:
 		var next_room: Global.Rooms = _new_room
 		if is_free_roam:
 			next_room = _new_room
@@ -130,7 +138,6 @@ func reset_path():
 	current_room = starting_room
 	path_pos = 0
 	phase = 0
-	print("i")
 
 
 func can_move() -> bool:
@@ -138,7 +145,7 @@ func can_move() -> bool:
 	# by default no condition is needed for an animatronic to be able to move if he wins a movement opportunity
 
 func free_roam_move_forward(target: Global.Rooms) -> void:
-	var path = get_free_roam_path(current_room, target)
+	var path = get_two_room_path(current_room, target)
 
 	if path.size() <= 1:
 		target_locked = false
@@ -149,7 +156,7 @@ func free_roam_move_forward(target: Global.Rooms) -> void:
 	if can_move():
 		current_room = next_room
 
-func get_free_roam_path(start: Global.Rooms, target: Global.Rooms) -> Array[Global.Rooms]:
+func get_two_room_path(start: Global.Rooms, target: Global.Rooms) -> Array[Global.Rooms]:
 	if start == target:
 		return [start]
 
