@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://b85klhvslwcgp"]
+
+[ext_resource type="Script" uid="uid://bjfog3y4wkpxp" path="res://Scripts/workplace_camera.gd" id="1_vdc7n"]
+[ext_resource type="Texture2D" uid="uid://ctdjql4i8tw55" path="res://Resources/Sprites/Background/background_sheet.png" id="4_emwuo"]
+[ext_resource type="Texture2D" uid="uid://dqoeae4dp00i0" path="res://Resources/Sprites/Camera/minimap.png" id="5_4ixuq"]
+[ext_resource type="Script" uid="uid://ck6h1ad6fpod2" path="res://Scripts/UI/cam_button.gd" id="5_4nnm3"]
+[ext_resource type="Script" uid="uid://b5hrc8b5trqab" path="res://Scripts/UI/background.gd" id="5_50dwd"]
+[ext_resource type="Texture2D" uid="uid://ica7dh0d4ou6" path="res://icon.svg" id="6_4nnm3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fo5ed"]
+atlas = ExtResource("4_emwuo")
+region = Rect2(0, 0, 1600, 722.727)
+
+[node name="WorkplaceCamera" type="Camera2D" unique_id=415335926 node_paths=PackedStringArray("background")]
+enabled = false
+script = ExtResource("1_vdc7n")
+background = NodePath("Background")
+
+[node name="Background" type="TextureRect" parent="." unique_id=895318932]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -800.0
+offset_top = -361.0
+offset_right = 800.0
+offset_bottom = 361.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_fo5ed")
+script = ExtResource("5_50dwd")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=395331526]
+
+[node name="Minimap" type="Control" parent="HUD" unique_id=1805337793]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/Minimap" unique_id=167234791]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -422.0
+offset_top = -481.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("5_4ixuq")
+
+[node name="LureButton" type="TextureButton" parent="HUD/Minimap" unique_id=957266432]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 41.0
+offset_top = -161.0
+offset_right = 169.0
+offset_bottom = -33.0
+grow_vertical = 0
+mouse_filter = 1
+texture_normal = ExtResource("6_4nnm3")
+
+[node name="CamButton" type="Area2D" parent="HUD/Minimap" unique_id=1849267986]
+z_index = 100
+texture_filter = 1
+position = Vector2(947, 433)
+script = ExtResource("5_4nnm3")
+cam_id = 3
+metadata/_edit_group_ = true
+
+[node name="CamLabel" type="RichTextLabel" parent="HUD/Minimap/CamButton" unique_id=1096369535]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Cam01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HUD/Minimap/CamButton" unique_id=1477773316]
+polygon = PackedVector2Array(-71, -28, -71, 26, 70, 26, 70, -28)
+
+[node name="CamButton2" type="Area2D" parent="HUD/Minimap" unique_id=1897616642]
+z_index = 100
+texture_filter = 1
+position = Vector2(1108, 465)
+script = ExtResource("5_4nnm3")
+cam_id = 1
+metadata/_edit_group_ = true
+
+[node name="CamLabel" type="RichTextLabel" parent="HUD/Minimap/CamButton2" unique_id=822593082]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Cam01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HUD/Minimap/CamButton2" unique_id=825637365]
+polygon = PackedVector2Array(-28, -20, -28, 18, 27, 18, 27, -20)
+
+[connection signal="pressed" from="HUD/Minimap/LureButton" to="." method="_on_lure_button_pressed"]

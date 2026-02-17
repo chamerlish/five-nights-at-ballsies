@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var pov_cam: Camera2D = $Camera2D
 
 var screen_size: Vector2
+var can_move: bool = true
 
 @onready var initial_pos = global_position
 
@@ -18,8 +19,10 @@ func _on_camera_changed(new_cam:int) -> void:
 	position = initial_pos
 	if (new_cam > Global.Rooms.OFFICE):
 		pov_cam.enabled = false
+		can_move = false
 	else:
 		pov_cam.enabled = true
+		can_move = true
 		
 
 func _physics_process(delta):
@@ -28,8 +31,12 @@ func _physics_process(delta):
 	var mouse_offset = (mouse_pos.x - screen_size.x / 2) / (screen_size.x / 2)
 	mouse_offset = clamp(mouse_offset * mouse_sensitivity, -1.0, 1.0)
 	
-	if !is_on_wall() or mouse_offset * position.x < 0:
-		velocity.x = mouse_offset * move_speed
+	if can_move:
+		if !is_on_wall() or mouse_offset * position.x < 0:
+			velocity.x = mouse_offset * move_speed
+	else: 
+		velocity.x = 0
+	
 	
 	move_and_slide()
 	

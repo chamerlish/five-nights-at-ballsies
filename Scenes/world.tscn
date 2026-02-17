@@ -73,6 +73,6 @@ shape = SubResource("WorldBoundaryShape2D_5ukr8")
 [node name="Animatronic" parent="." unique_id=396223518 instance=ExtResource("7_o06y3")]
 position = Vector2(-384, -96)
 texture = ExtResource("6_5ukr8")
-ai_difficulty = 1000
+ai_difficulty = 20
 path_patrol = Array[ExtResource("7_k7acu")]([SubResource("Resource_o06y3"), SubResource("Resource_k7acu"), SubResource("Resource_5v1tr")])
 allowed_rooms = Array[int]([0, 1, 2])

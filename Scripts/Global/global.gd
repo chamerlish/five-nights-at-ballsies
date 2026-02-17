@@ -1,7 +1,9 @@
 extends Node
 
-signal camera_changed(new_cam)
-signal animatronic_moved(old_room, new_room, id)
+signal camera_changed(new_cam: Rooms)
+signal animatronic_moved(old_room: Rooms, new_room: Rooms, id: int)
+signal audio_lure_played(played_position: Rooms)
+
 
 var _currect_cam: int = 0
 
@@ -11,7 +13,19 @@ enum Rooms {
 	BACKSTAGE = -1,
 	OFFICE,
 	RESTROOM,
+	MAIN_HALL,
+	KIDS_SPACE,
+	CAFETERIA,
 	KITCHEN,
+	FREEZER_ROOM,
+	STORAGE_ROOM,
+	SCRAPS_AND_SERVICE,
+	HALLWAY1,
+	HALLWAY2,
+	HALLWAY3,
+	HALLWAY4,
+	EXIT,
+	
 	NONE
 }
 

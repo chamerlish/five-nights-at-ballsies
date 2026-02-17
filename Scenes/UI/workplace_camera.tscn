@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://b85klhvslwcgp"]
 
 [ext_resource type="Script" uid="uid://bjfog3y4wkpxp" path="res://Scripts/workplace_camera.gd" id="1_vdc7n"]
-[ext_resource type="PackedScene" uid="uid://dxb4yopxcwc16" path="res://Scenes/UI/cam_button.tscn" id="3_55os6"]
 [ext_resource type="Texture2D" uid="uid://ctdjql4i8tw55" path="res://Resources/Sprites/Background/background_sheet.png" id="4_emwuo"]
 [ext_resource type="Texture2D" uid="uid://dqoeae4dp00i0" path="res://Resources/Sprites/Camera/minimap.png" id="5_4ixuq"]
+[ext_resource type="Script" uid="uid://ck6h1ad6fpod2" path="res://Scripts/UI/cam_button.gd" id="5_4nnm3"]
 [ext_resource type="Script" uid="uid://b5hrc8b5trqab" path="res://Scripts/UI/background.gd" id="5_50dwd"]
+[ext_resource type="Texture2D" uid="uid://ica7dh0d4ou6" path="res://icon.svg" id="6_4nnm3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fo5ed"]
 atlas = ExtResource("4_emwuo")
@@ -16,7 +17,6 @@ script = ExtResource("1_vdc7n")
 background = NodePath("Background")
 
 [node name="Background" type="TextureRect" parent="." unique_id=895318932]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -30,41 +30,349 @@ mouse_filter = 2
 texture = SubResource("AtlasTexture_fo5ed")
 script = ExtResource("5_50dwd")
 
-[node name="Minimap" type="Control" parent="." unique_id=1805337793]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=395331526]
+
+[node name="Minimap" type="Control" parent="HUD" unique_id=1805337793]
 layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="HUD/Minimap" unique_id=167234791]
+texture_filter = 1
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -40.0
-offset_top = -40.0
+offset_left = -422.0
+offset_top = -481.0
 grow_horizontal = 0
 grow_vertical = 0
-
-[node name="TextureRect" type="TextureRect" parent="Minimap" unique_id=167234791]
-texture_filter = 1
-layout_mode = 0
-offset_left = 154.0
-offset_top = -160.0
-offset_right = 576.0
-offset_bottom = 321.0
 mouse_filter = 2
 texture = ExtResource("5_4ixuq")
 
-[node name="CamButton2" parent="Minimap" unique_id=956618251 instance=ExtResource("3_55os6")]
-layout_mode = 0
-offset_left = 407.0
-offset_top = 100.0
-offset_right = 440.0
-offset_bottom = 131.0
-cam_id = 1
-direction = 1
+[node name="LureButton" type="TextureButton" parent="HUD/Minimap" unique_id=957266432]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 41.0
+offset_top = -161.0
+offset_right = 169.0
+offset_bottom = -33.0
+grow_vertical = 0
+mouse_filter = 1
+texture_normal = ExtResource("6_4nnm3")
 
-[node name="CamButton3" parent="Minimap" unique_id=726059623 instance=ExtResource("3_55os6")]
-layout_mode = 0
-offset_left = 353.0
-offset_top = 148.0
-offset_right = 386.0
-offset_bottom = 179.0
+[node name="BUTTONS" type="Control" parent="HUD/Minimap" unique_id=1651489667]
+anchors_preset = 0
+offset_left = 730.0
+offset_top = 167.0
+offset_right = 770.0
+offset_bottom = 207.0
+
+[node name="CamButton3" type="Area2D" parent="HUD/Minimap/BUTTONS" unique_id=1446650403]
+z_index = 100
+texture_filter = 1
+position = Vector2(298, 202)
+script = ExtResource("5_4nnm3")
+cam_id = 3
+metadata/_edit_group_ = true
+
+[node name="CamLabel" type="RichTextLabel" parent="HUD/Minimap/BUTTONS/CamButton3" unique_id=653651037]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Cam01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HUD/Minimap/BUTTONS/CamButton3" unique_id=1943928675]
+polygon = PackedVector2Array(32, -49, 32, -10, 11, -10, 11, 12, 32, 12, 32, 45, 4, 45, 4, 22, -18, 22, -18, -26, 4, -26, 4, -49)
+
+[node name="CamButton2" type="Area2D" parent="HUD/Minimap/BUTTONS" unique_id=1897616642]
+z_index = 100
+texture_filter = 1
+position = Vector2(378, 298)
+script = ExtResource("5_4nnm3")
+cam_id = 8
+metadata/_edit_group_ = true
+
+[node name="CamLabel" type="RichTextLabel" parent="HUD/Minimap/BUTTONS/CamButton2" unique_id=822593082]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Cam01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HUD/Minimap/BUTTONS/CamButton2" unique_id=825637365]
+polygon = PackedVector2Array(-28, -20, -28, 18, 27, 18, 27, -20)
+
+[node name="CamButton" type="Area2D" parent="HUD/Minimap/BUTTONS" unique_id=1849267986]
+z_index = 100
+texture_filter = 1
+position = Vector2(217, 266)
+script = ExtResource("5_4nnm3")
 cam_id = 2
+metadata/_edit_group_ = true
+
+[node name="CamLabel" type="RichTextLabel" parent="HUD/Minimap/BUTTONS/CamButton" unique_id=1096369535]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Cam01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HUD/Minimap/BUTTONS/CamButton" unique_id=1477773316]
+polygon = PackedVector2Array(-71, -28, -71, 26, 70, 26, 70, -28)
+
+[node name="CamButton4" type="Area2D" parent="HUD/Minimap/BUTTONS" unique_id=616378704]
+z_index = 100
+texture_filter = 1
+position = Vector2(154, 118)
+script = ExtResource("5_4nnm3")
+cam_id = 5
+metadata/_edit_group_ = true
+
+[node name="CamLabel" type="RichTextLabel" parent="HUD/Minimap/BUTTONS/CamButton4" unique_id=541408240]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Cam01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HUD/Minimap/BUTTONS/CamButton4" unique_id=241692017]
+polygon = PackedVector2Array(-7, -27, 37, -27, 37, 19, -49, 19, -49, -14, -7, -14)
+
+[node name="CamButton5" type="Area2D" parent="HUD/Minimap/BUTTONS" unique_id=390752253]
+z_index = 100
+texture_filter = 1
+position = Vector2(72, 124)
+script = ExtResource("5_4nnm3")
+cam_id = 6
+metadata/_edit_group_ = true
+
+[node name="CamLabel" type="RichTextLabel" parent="HUD/Minimap/BUTTONS/CamButton5" unique_id=969034398]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Cam01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HUD/Minimap/BUTTONS/CamButton5" unique_id=1245105149]
+polygon = PackedVector2Array(15, -19, 15, 18, -12, 18, -12, -19)
+
+[node name="CamButton6" type="Area2D" parent="HUD/Minimap/BUTTONS" unique_id=240810227]
+z_index = 100
+texture_filter = 1
+position = Vector2(215, 201)
+script = ExtResource("5_4nnm3")
+cam_id = 4
+metadata/_edit_group_ = true
+
+[node name="CamLabel" type="RichTextLabel" parent="HUD/Minimap/BUTTONS/CamButton6" unique_id=1987528979]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Cam01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HUD/Minimap/BUTTONS/CamButton6" unique_id=1475857665]
+polygon = PackedVector2Array(-56, -20, 48, -20, 48, 20, -56, 20)
+
+[node name="CamButton7" type="Area2D" parent="HUD/Minimap/BUTTONS" unique_id=940663711]
+z_index = 100
+texture_filter = 1
+position = Vector2(198, 336)
+script = ExtResource("5_4nnm3")
+cam_id = 1
+metadata/_edit_group_ = true
+
+[node name="CamLabel" type="RichTextLabel" parent="HUD/Minimap/BUTTONS/CamButton7" unique_id=1732509474]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Cam01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HUD/Minimap/BUTTONS/CamButton7" unique_id=1185482275]
+polygon = PackedVector2Array(-36, -28, -36, 9, -23, 9, -23, 43, 20, 43, 20, 9, 34, 9, 34, -28)
+
+[node name="CamButton8" type="Area2D" parent="HUD/Minimap/BUTTONS" unique_id=758506574]
+z_index = 100
+texture_filter = 1
+position = Vector2(272, 396)
+script = ExtResource("5_4nnm3")
+cam_id = 9
+metadata/_edit_group_ = true
+
+[node name="CamLabel" type="RichTextLabel" parent="HUD/Minimap/BUTTONS/CamButton8" unique_id=915322155]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Cam01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HUD/Minimap/BUTTONS/CamButton8" unique_id=221001945]
+polygon = PackedVector2Array(-14, -36, 11, -36, 11, 36, -14, 36)
+
+[node name="CamButton9" type="Area2D" parent="HUD/Minimap/BUTTONS" unique_id=1522770320]
+z_index = 100
+texture_filter = 1
+position = Vector2(141, 403)
+script = ExtResource("5_4nnm3")
+cam_id = 10
+metadata/_edit_group_ = true
+
+[node name="CamLabel" type="RichTextLabel" parent="HUD/Minimap/BUTTONS/CamButton9" unique_id=2033054574]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Cam01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HUD/Minimap/BUTTONS/CamButton9" unique_id=1588730420]
+polygon = PackedVector2Array(14, -31, -11, -31, -11, 29, 14, 29)
+
+[node name="CamButton10" type="Area2D" parent="HUD/Minimap/BUTTONS" unique_id=279512112]
+z_index = 100
+texture_filter = 1
+position = Vector2(317, 322)
+script = ExtResource("5_4nnm3")
+cam_id = 13
+metadata/_edit_group_ = true
+
+[node name="CamLabel" type="RichTextLabel" parent="HUD/Minimap/BUTTONS/CamButton10" unique_id=1887577366]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Cam01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HUD/Minimap/BUTTONS/CamButton10" unique_id=522849446]
+polygon = PackedVector2Array(-15, -38, 13, -38, 13, 33, -15, 33)
+
+[node name="CamButton11" type="Area2D" parent="HUD/Minimap/BUTTONS" unique_id=2021224153]
+z_index = 100
+texture_filter = 1
+position = Vector2(48, 342)
+script = ExtResource("5_4nnm3")
+cam_id = 7
+metadata/_edit_group_ = true
+
+[node name="CamLabel" type="RichTextLabel" parent="HUD/Minimap/BUTTONS/CamButton11" unique_id=1874181849]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Cam01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HUD/Minimap/BUTTONS/CamButton11" unique_id=740391859]
+polygon = PackedVector2Array(-14, -19, 13, -19, 13, 18, -14, 18)
+
+[node name="CamButton12" type="Area2D" parent="HUD/Minimap/BUTTONS" unique_id=166786354]
+z_index = 100
+texture_filter = 1
+position = Vector2(82, 248)
+script = ExtResource("5_4nnm3")
+cam_id = 12
+metadata/_edit_group_ = true
+
+[node name="CamLabel" type="RichTextLabel" parent="HUD/Minimap/BUTTONS/CamButton12" unique_id=1013350660]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Cam01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HUD/Minimap/BUTTONS/CamButton12" unique_id=288350622]
+polygon = PackedVector2Array(14, -39, 14, 32, -14, 32, -14, -39)
+
+[node name="CamButton13" type="Area2D" parent="HUD/Minimap/BUTTONS" unique_id=799003107]
+z_index = 100
+texture_filter = 1
+position = Vector2(107, 380)
+script = ExtResource("5_4nnm3")
+cam_id = 11
+metadata/_edit_group_ = true
+
+[node name="CamLabel" type="RichTextLabel" parent="HUD/Minimap/BUTTONS/CamButton13" unique_id=1069216382]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+text = "Cam01"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HUD/Minimap/BUTTONS/CamButton13" unique_id=1072292270]
+polygon = PackedVector2Array(11, -19, 11, 21, -12, 21, -12, -19)
+
+[connection signal="pressed" from="HUD/Minimap/LureButton" to="." method="_on_lure_button_pressed"]
