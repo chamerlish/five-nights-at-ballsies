@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://ck6h1ad6fpod2" path="res://Scripts/UI/cam_button.gd" id="5_4nnm3"]
 [ext_resource type="Script" uid="uid://b5hrc8b5trqab" path="res://Scripts/UI/background.gd" id="5_50dwd"]
 [ext_resource type="Texture2D" uid="uid://ica7dh0d4ou6" path="res://icon.svg" id="6_4nnm3"]
+[ext_resource type="PackedScene" uid="uid://bj2rtqqgqewjc" path="res://Scenes/UI/temperature_control_button.tscn" id="7_s26lp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fo5ed"]
 atlas = ExtResource("4_emwuo")
@@ -81,7 +82,7 @@ z_index = 100
 texture_filter = 1
 position = Vector2(298, 202)
 script = ExtResource("5_4nnm3")
-cam_id = 3
+cam_id = 13
 metadata/_edit_group_ = true
 
 [node name="CamLabel" type="RichTextLabel" parent="HUD/Minimap/BUTTONS/CamButton3" unique_id=653651037]
@@ -374,5 +375,9 @@ vertical_alignment = 1
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HUD/Minimap/BUTTONS/CamButton13" unique_id=1072292270]
 polygon = PackedVector2Array(11, -19, 11, 21, -12, 21, -12, -19)
+
+[node name="TemperatureControlButton" parent="HUD/Minimap" unique_id=1928081115 instance=ExtResource("7_s26lp")]
+layout_mode = 1
+offset_top = -225.0
 
 [connection signal="pressed" from="HUD/Minimap/LureButton" to="." method="_on_lure_button_pressed"]

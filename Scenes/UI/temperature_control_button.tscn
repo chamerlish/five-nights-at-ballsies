@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://bj2rtqqgqewjc"]
+
+[ext_resource type="Texture2D" uid="uid://b78j8epa1ud72" path="res://Resources/Sprites/UI/freezer_button.png" id="1_1k3nf"]
+[ext_resource type="Script" uid="uid://ct6rj7u7v1bru" path="res://Scripts/UI/temperature_control_button.gd" id="1_5hpw8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hpw8"]
+atlas = ExtResource("1_1k3nf")
+region = Rect2(0, 0, 168, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xmx6r"]
+atlas = ExtResource("1_1k3nf")
+region = Rect2(0, 143, 168, 58)
+
+[node name="TemperatureControlButton" type="VBoxContainer" unique_id=1928081115]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -195.0
+offset_right = 168.0
+grow_vertical = 0
+theme_override_constants/separation = 0
+alignment = 1
+script = ExtResource("1_5hpw8")
+
+[node name="TempLabel" type="RichTextLabel" parent="." unique_id=257549700]
+layout_mode = 2
+text = "-14°C"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=192881861]
+texture_filter = 1
+layout_mode = 2
+texture = SubResource("AtlasTexture_5hpw8")
+
+[node name="DownTempButton" type="TextureButton" parent="." unique_id=1210464060]
+texture_filter = 1
+layout_mode = 2
+texture_normal = SubResource("AtlasTexture_xmx6r")
+
+[node name="TempDelay" type="Timer" parent="." unique_id=1113018145]
+autostart = true
+
+[connection signal="button_down" from="DownTempButton" to="." method="_on_down_temp_button_button_down"]
+[connection signal="timeout" from="TempDelay" to="." method="_on_temp_delay_timeout"]
