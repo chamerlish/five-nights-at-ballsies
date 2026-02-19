@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="RoomData" format=3 uid="uid://b5robwpo1vjql"]
+
+[ext_resource type="Script" uid="uid://ci0lny6cldcke" path="res://Scripts/Resources/room_data.gd" id="1_x0tm4"]
+
+[resource]
+script = ExtResource("1_x0tm4")
+room_id = 1
+room_name = "Restroom"
+adjacent_roome = Array[int]([2, 7, 0, 11])
+metadata/_custom_type_script = "uid://ci0lny6cldcke"

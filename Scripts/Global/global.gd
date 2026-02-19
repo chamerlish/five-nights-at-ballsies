@@ -30,10 +30,19 @@ enum Rooms {
 }
 
 var rooms_data: Array[RoomData] = [
-	preload("res://Resources/Rooms/room1.tres"),
-	preload("res://Resources/Rooms/room2.tres"),
-	preload("res://Resources/Rooms/room3.tres")
-	
+	preload("res://Resources/Rooms/exit.tres"),
+	preload("res://Resources/Rooms/hallway1.tres"),
+	preload("res://Resources/Rooms/hallway2.tres"),
+	preload("res://Resources/Rooms/hallway3.tres"),
+	preload("res://Resources/Rooms/hallway4.tres"),
+	preload("res://Resources/Rooms/kids_zone.tres"),
+	preload("res://Resources/Rooms/freezer_room.tres"),
+	preload("res://Resources/Rooms/kitchen.tres"),
+	preload("res://Resources/Rooms/cafeteria.tres"),
+	preload("res://Resources/Rooms/main_hall.tres"),
+	preload("res://Resources/Rooms/restroom.tres"),
+	preload("res://Resources/Rooms/scraps_and_service.tres"),
+	preload("res://Resources/Rooms/storage_room.tres"),
 ]
 
 var animatronic_list: Array[Animatronic] = []
