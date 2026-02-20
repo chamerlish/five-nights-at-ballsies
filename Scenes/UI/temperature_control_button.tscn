@@ -40,6 +40,7 @@ layout_mode = 2
 texture_normal = SubResource("AtlasTexture_xmx6r")
 
 [node name="TempDelay" type="Timer" parent="." unique_id=1113018145]
+wait_time = 15.0
 autostart = true
 
 [connection signal="button_down" from="DownTempButton" to="." method="_on_down_temp_button_button_down"]

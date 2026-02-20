@@ -75,4 +75,5 @@ position = Vector2(-384, -96)
 texture = ExtResource("6_5ukr8")
 ai_difficulty = 20
 path_patrol = Array[ExtResource("7_k7acu")]([SubResource("Resource_o06y3"), SubResource("Resource_k7acu"), SubResource("Resource_5v1tr")])
-allowed_rooms = Array[int]([0, 1, 2])
+allowed_rooms = Array[int]([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0, 13])
+is_free_roam = true

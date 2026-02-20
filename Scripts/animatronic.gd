@@ -39,6 +39,7 @@ func _ready() -> void:
 	current_room = starting_room
 	
 	movement_opportunity_timer.autostart = false
+	movement_opportunity_timer.start()
 	add_child(movement_opportunity_timer)
 	
 	if is_free_roam:
@@ -82,6 +83,7 @@ var is_in_left_door: bool
 
 @warning_ignore("shadowed_variable")
 func _on_animatronic_moved(_old_room, _new_room, animatronic_id):
+	print(_new_room)
 	# Only update next_room_animatronic if THIS animatronic moved
 	if animatronic_id == self.animatronic_id:
 		var next_room: Global.Rooms = _new_room
