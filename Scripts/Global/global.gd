@@ -3,7 +3,13 @@ extends Node
 signal camera_changed(new_cam: Rooms)
 signal animatronic_moved(old_room: Rooms, new_room: Rooms, id: int)
 signal audio_lure_played(played_position: Rooms)
+signal temperature_changed(new_temp: int)
 
+const MIN_TEMP: int = -28
+var current_temperature: int = MIN_TEMP:
+	set(value):
+		temperature_changed.emit(value)
+		current_temperature = max(MIN_TEMP, value)
 
 var _currect_cam: int = 0
 

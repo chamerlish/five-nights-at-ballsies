@@ -6,8 +6,6 @@
 z_index = 100
 texture_filter = 1
 script = ExtResource("2_1v8cu")
-cam_id = null
-direction = null
 metadata/_edit_group_ = true
 
 [node name="CamLabel" type="RichTextLabel" parent="." unique_id=1096369535]
